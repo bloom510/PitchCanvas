@@ -1,0 +1,128 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+    body{ background-color: ivory; font-family: Helvetica; }
+    #canvas{border:1px solid red;}
+    </style>
+  </head>
+  <body>
+
+    <canvas id="canvas" width='350' height='300'></canvas>
+    <br>
+    <button id='showCoords'>Show XY coordinates</button>
+    <button id='showNum'>Show pitch coordinates</button>
+    <br>
+    <br>
+    <div id='about'>
+   ©2017 Nathan Bloomfield All Rights Reserved
+   <br>
+   <br>
+    This module provides an environment for visualization of harmonic structures on a 2-dimensional plane using HTML5 Canvas and JavaScript.
+    It is intended for use as an educational tool for the demonstration of musical concepts in future applications as well as a being a vehicle for harmonic exploration.
+    <br>
+    <br>
+    Instructions
+    <ul>
+    <li>Clicking 'Show XY Coordinates' toggles XY coords for each point. This gives the programmer a reference for precise, hassle-free drawing of lines from point A to point B even if the circle radius is resized.</li>
+    <br>
+    <li>Clicking 'Show Pitch Coordinates' toggles numbers 0-11, representing atonal pitch space with 0 as the fundamental.</li>
+    </ul>
+    <br>
+    <br>
+    Upcoming features:
+    <ul>
+    <li>Drawing UI (an augmented triad is currently hard-coded in)</li>
+    <li>Map note names to each pitch coordinate</li>
+    <li>Use WebMIDI API for playback</li>
+   </ul>
+
+    </div>
+    <script>
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+
+    let showXY = false;
+    let showCoords = false;
+    let toggleXY = false;
+    let toggleNum = false;
+
+    $('#showCoords').on('click', function(){
+      if(!toggleXY){
+      showXY = true;
+      toggleXY = true;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      draw();
+    } else {
+    showXY = false;
+    toggleXY = false;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    draw();
+  }
+    });
+
+    $('#showNum').on('click', function(){
+      if(!toggleNum){
+      showCoords = true;
+      toggleNum = true;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      draw();
+    } else {
+    showCoords = false;
+    toggleNum = false;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    draw();
+
+  }
+    });
+
+      let draw = function (){
+      var dotsPerCircle=12;
+
+      var interval=(Math.PI*2)/dotsPerCircle;
+
+      var centerX=canvas.width/2;
+      var centerY=canvas.height/2;
+      var radius=120;
+
+    for(var i=0;i<dotsPerCircle;i++){
+
+        desiredRadianAngleOnCircle = interval*(i+9);
+
+        var x = Math.round(centerX+radius*Math.cos(desiredRadianAngleOnCircle));
+        var y = Math.round(centerY+radius*Math.sin(desiredRadianAngleOnCircle));
+        console.log(`${x}, ${y}`);
+
+         context.beginPath();
+         context.arc(x,y,2,0,Math.PI*2);
+         if(showXY){
+         context.font = "12px Arial";
+         context.fillText(`${x}, ${y}`,x,y);
+
+         }
+         if(showCoords){
+           context.font = "12px Arial";
+           context.fillText(`${i}`,x,y);
+         }
+         context.fill();
+
+    }
+    //DRAW LINES HERE
+    context.moveTo(175, 30); //12 o'clock coordinates
+    context.lineTo(71, 210);
+    context.lineTo(279, 210);
+    context.lineTo(175, 30);
+
+    context.stroke();
+  }
+  draw();
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
