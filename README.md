@@ -1,0 +1,2 @@
+# PitchCanvas
+Harmonic visualization tool.
