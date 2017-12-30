@@ -1,95 +1,28 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <title></title>
   <style>
-    body {
-      background-color: ivory;
-      font-family: Helvetica;
+    canvas {
+      border: 1px solid red;
     }
-    #about{
-      width: 50%;
-    }
-    #instructions{
-      width: 50%;
-    }
-    #about, #instructions, #upcoming{
-      padding: 1%;
-    }
-    #about{
-      float: right;
-    }
-    h1, copyright{
-      float: left;
-      padding-right: 2%;
-    }
-    copyright{
-      margin-left: 50%;
-    }
-  #container{
-  max-height: 325px;
-  width: 100%;
-  height: 100%;
-   margin: 0;
-   padding: 0;
-   overflow-x: auto;
-   overflow-y: visible;
-  }
-  #addModule, #myCanvas{
-    margin-right: 3%;
-    float: left;
-  }
-  #addModule{
-    border: 2px solid black;
-    width: 550px;
-    height: 300px;
-  }
-  #myCanvas{
-    border: 2px solid black;
-  }
-  #module{
-    margin: 1%;
-  }
-
   </style>
 </head>
 
 <body>
-  <header>
-  <h1>PitchCanvas</h1> <copyright><small>©2017 Nathan Bloomfield All Rights Reserved</small></copyright>
-</header>
-  <br>
-  <div id='container'>
-  <canvas id='myCanvas' width='300' height='300'></canvas>
-  <div id='addModule'><div id='module'>Additional modules will appear here when created. See About, Instructions, and Upcoming Features below.</div></div>
-</div>
-  <br>
-  <div id='about'>
-    <h4>About</h4>
-    This module provides an environment for visualization of harmonic structures on a 2-dimensional plane using HTML5 Canvas and JavaScript. It is intended for use as an educational tool for the demonstration of musical concepts in future applications
-    as well as a being a vehicle for harmonic exploration.
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <div id="wrapper">
+    <canvas id='myCanvas' width='300' height='300'></canvas>
   </div>
-  <div id='instructions'>
-    <h4>Instructions</h4>
-    <ul>
-      <li>Click any dot to initialize the line tool from that point.</li>
-      <br>
-      <li>Click on any other dot to draw a line from your last selection to the current one.</li>
-      <br>
-      <li>Shortcuts: Press the 'L' key to lift the brush, and press the 'X' key to erase your work.</li>
-    </ul>
-  </div>
-  <div id='upcoming'>
-    <h4>Upcoming features:</h4>
-    <ul>
-      <li>Extended Drawing UI (color coding, object oriented, rotation, etc)</li>
-      <li>Map note names to each pitch coordinate and use WebAudio API for MIDI playback</li>
-      <li>Visualize whole and half-steps with arrows for pedagogical purposes</li>
-      <li>Integrate VexFlow for staff notation for multiple perspectives</li>
-    </ul>
-  </div>
+
   <script>
+    /*SOLUTION: NO MOUSE DRAWING
+        1. Grab coordinates of mouse click on dot (point A)
+        2.Change color/border color of the dot selected
+        3. Caputure coordinates of second dot (point B) and connect the dots
+       */
     let canvas = document.querySelector("#myCanvas");
     let context = canvas.getContext("2d");
     let circles = [];
@@ -187,10 +120,6 @@
       let x = e.which || e.keyCode;
       if (x === 108) {
         alert("Brush lifted");
-        lineInit = false;
-      } else if (x === 120) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        PitchCircle();
         lineInit = false;
       } else {
         alert(e.keyCode);
