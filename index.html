@@ -25,7 +25,8 @@
       padding-right: 2%;
     }
     copyright{
-      margin-left: 50%;
+      margin-left: 40%;
+      float: left;
     }
   #container{
   max-height: 325px;
@@ -62,7 +63,11 @@
   <br>
   <div id='container'>
   <canvas id='myCanvas' width='300' height='300'></canvas>
-  <div id='addModule'><div id='module'>Additional modules will appear here when created. See About, Instructions, and Upcoming Features below.</div></div>
+  <div id='addModule'><div id='module'>Additional modules will appear here when created. See About, Instructions, and Upcoming Features below.
+    <br><br>
+  Questions or comments? I'd love to hear from you!<br><br> Drop me a line at: (email here).
+  </div>
+</div>
 </div>
   <br>
   <div id='about'>
@@ -121,7 +126,9 @@
     //Draw pitch circle
     function PitchCircle() {
       for (let i = 0; i < 12; i++) {
+        //Circle divided by number of dots
         let interval = (Math.PI * 2) / 12;
+        //spacial distribution of each dot
         let radianAngle = interval * (i + 9);
         let x = Math.round(circle.xPos + circle.radius * Math.cos(radianAngle));
         let y = Math.round(circle.yPos + circle.radius * Math.sin(radianAngle));
