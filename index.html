@@ -2,88 +2,33 @@
 
 <head>
   <!-- TODO: Pretty up with Bootstrap, move scripts and styles to external files, deploy to Heroku static page -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <link rel='stylesheet' href='./assets/css/style.css'>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <style>
-    body {
-      background-color: ivory;
-      font-family: Helvetica;
-    }
-    #about{
-      width: 50%;
-    }
-    #instructions{
-      width: 50%;
-    }
-    #about, #instructions, #upcoming{
-      padding: 1%;
-    }
-    #about{
-      float: right;
-    }
-    h1, copyright{
-      float: left;
-      padding-right: 2%;
-    }
-    copyright{
-      margin-left: 40%;
-      float: left;
-    }
-  #container{
-    /* border: 2px solid red; */
-    max-height: 325px;
-    max-width: 925px;
-    width: 100%;
-    height: 100%;
-   margin: auto;
-   padding: 1%;
-   overflow-x: auto;
-   overflow-y: visible;
-  }
-  #addModule, #myCanvas{
-    margin-right: 3%;
-    float: left;
-  }
-  #addModule{
-    border: 2px solid black;
-    width: 550px;
-    height: 300px;
-  }
-  #myCanvas{
-    border: 2px solid black;
-  }
-  #module{
-    margin: 1%;
-  }
-
-  </style>
 </head>
 
 <body>
   <header>
-  <h1>PitchCanvas</h1> <copyright><small>©2017 Nathan Bloomfield All Rights Reserved</small></copyright>
-</header>
+    <h1>PitchCanvas</h1>
+    <copyright><small>©2017 Nathan Bloomfield All Rights Reserved</small></copyright>
+  </header>
   <br>
   <div id='container'>
-  <canvas id='myCanvas' width='300' height='300'></canvas>
-  <div id='addModule'><div id='module'>
-    <h4>Summary: </h4>
-    A pitch circle represents the chromatic scale, ascending in clockwise direction. One circle represents all transpositions.
-    For more information, check out Miles Okazaki's <a href='http://www.milesokazaki.com/wp-content/uploads/2016/02/visual-reference-smaller.pdf#page=5' target='_blank'><em>Visual Reference for Musicians (p5)</em></a>.
-    <br>
-    <br>
-    Additional modules will appear here when created. See About, Instructions, and Upcoming Features below. I plan to make this open source and encourage collaboration!
-    <br>
-    <br>
-  Questions or comments? I'd love to hear from you!<br><br> Drop me a line at: bloom510@protonmail.com
+    <canvas id='myCanvas' width='300' height='300'></canvas>
+    <div id='addModule'>
+      <div id='module'>
+        <h4>Summary: </h4> A pitch circle represents the chromatic scale, ascending in clockwise direction. One circle represents all transpositions. For more information, check out Miles Okazaki's <a href='http://www.milesokazaki.com/wp-content/uploads/2016/02/visual-reference-smaller.pdf#page=5'
+          target='_blank'><em>Visual Reference for Musicians (p5)</em></a>.
+        <br>
+        <br> Additional modules will appear here when created. See About, Instructions, and Upcoming Features below. I plan to make this open source and encourage collaboration!
+        <br>
+        <br> Questions or comments? I'd love to hear from you!<br><br> Drop me a line at: bloom510@protonmail.com
+      </div>
+    </div>
   </div>
-</div>
-</div>
   <br>
   <div id='about'>
-    <h4>About</h4>
-    This module provides an environment for visualization of harmonic structures on a 2-dimensional plane using HTML5 Canvas and JavaScript. It is intended for use as an educational tool for the demonstration of musical concepts in future applications
+    <h4>About</h4> This module provides an environment for visualization of harmonic structures on a 2-dimensional plane using HTML5 Canvas and JavaScript. It is intended for use as an educational tool for the demonstration of musical concepts in future applications
     as well as a being a vehicle for harmonic exploration.
   </div>
   <div id='instructions'>
@@ -105,7 +50,7 @@
       <li>Integrate VexFlow for staff notation for multiple perspectives</li>
     </ul>
   </div>
-  <script src='./PitchCanvas.js'></script>
+  <script src='./assets/javascript/PitchCanvas.js'></script>
 </body>
 
 </html>
