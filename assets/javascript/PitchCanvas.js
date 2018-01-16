@@ -1,17 +1,16 @@
   //NOTE: will be updating to ES6 syntax
 
-  //our canvas element
-  let canvas = document.querySelector("#myCanvas");
-  //canvas context
-  let context = canvas.getContext("2d");
+
+  let canvas = document.querySelector("#myCanvas");  //our canvas element
+  let context = canvas.getContext("2d");   //canvas context
 
   //Canvas only remembers the last item drawn,
   //so an array is created to store circles as discrete objects
-  let circles = [];
+  let dots = [];
 
   //creates a singular circle object to be distributed along the perimeter of a larger circle
-  let circle = {
-    radius: 100,
+  let dot = {
+    radius: 100, //affects the radius of polar coords tbd
     xPos: canvas.width / 2,
     yPos: canvas.height / 2,
     color: "black",
@@ -32,7 +31,6 @@
   //Draw pitch circle (12-pointed circle)
   function PitchCircle() {
     for (let i = 0; i < 12; i++) {
-
       /*
       To compute the angle for each point, keeping the radius
       constant we use the formula angle = 360° * index / number
@@ -45,34 +43,33 @@
       let radianAngle = interval * (i + 9);
 
       //Convert x and y coords from cartesian to polar, relative to the circle's radius
-      let x = Math.round(circle.xPos + circle.radius * Math.cos(radianAngle));
-      let y = Math.round(circle.yPos + circle.radius * Math.sin(radianAngle));
+      let x = Math.round(dot.xPos + dot.radius * Math.cos(radianAngle));
+      let y = Math.round(dot.yPos + dot.radius * Math.sin(radianAngle));
 
-      //Create a new circle for every iteration through this loop
-      let newCircle = Object.create(circle);
-      newCircle.x = x;
-      newCircle.y = y;
-      newCircle.draw(x, y);
-      circles.push(newCircle);
+      //Create a new dot for every iteration through this loop
+      let newdot = Object.create(dot);
+      newdot.x = x;
+      newdot.y = y;
+      newdot.draw(x, y);
+      dots.push(newdot);
     }
   }
 
   PitchCircle();
 
 
-  // Detect dot clicks
 
   let lineInit = false;  // lineInit determines whether the brush is lifted or down so that
                         //we're not drawing one continuous line
-
+  // Detect dot clicks
   canvas.onmousedown = function(e) {
     let mousePos = getMousePos(canvas, e); //gets mouse position
 
     //iterate through array containing the 12 circles
-    for (i = 0; i < circles.length; i++) {
+    for (i = 0; i < dots.length; i++) {
       //get difference between mouse position and the circles
-      y = mousePos.y - circles[i].y;
-      x = mousePos.x - circles[i].x;
+      y = mousePos.y - dots[i].y;
+      x = mousePos.x - dots[i].x;
 
       //calculate the distance of the mouse from the center of our circles
       let dist = Math.sqrt(y * y + x * x);
@@ -81,12 +78,12 @@
         //draw line if drawing already intitiated
         if (lineInit === true) {
           console.log('drawing line');
-          context.lineTo(circles[i].x, circles[i].y);
+          context.lineTo(dots[i].x, dots[i].y);
           context.stroke();
           // lineInit = false;
         } else { //move context to the clicked circle and initiate drawing
           console.log('dot clicked');
-          context.moveTo(circles[i].x, circles[i].y);
+          context.moveTo(dots[i].x, dots[i].y);
           lineInit = true;
         }
       }
