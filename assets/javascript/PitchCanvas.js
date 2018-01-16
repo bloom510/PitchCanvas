@@ -34,8 +34,10 @@
     for (let i = 0; i < 12; i++) {
 
       /*
-      2π radians make up the 360 degrees in a circle. Divide this by the amount
-      of items desired to calculate the spatial distribution for each index.
+      To compute the angle for each point, keeping the radius
+      constant we use the formula angle = 360° * index / number
+      of sides. We'll be dealing with radians and note degrees here,
+      and 2π radians make up the 360 degrees in a circle.
       */
       let interval = (Math.PI * 2) / 12;
 
@@ -113,7 +115,7 @@
       context.clearRect(0, 0, canvas.width, canvas.height);
       PitchCircle();
       lineInit = false;
-    } 
+    }
   }
 
 
