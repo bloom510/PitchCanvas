@@ -10,7 +10,7 @@
 
   const init = () => {
     context.clearRect(0,0, canvas.width, canvas.height)
-    context.lineWidth = 5;
+    context.lineWidth = 2;
     context.strokeStyle = '#77aaff'
     context.lineCap = 'round'
     // context.setLineDash([3,5]);
@@ -25,7 +25,7 @@
 
   //creates a singular circle object to be distributed along the perimeter of a larger circle
   let dot = {
-    radius: 650, //affects the radius of polar coords tbd
+    radius: 550, //affects the radius of polar coords tbd
     xPos: canvas.width / 2,
     yPos: (canvas.height) / 2,
     color: "transparent",
@@ -58,7 +58,7 @@
   //Draw pitch circle (12-pointed circle)
   function PitchCircle() {
     
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 12; i++) {
       /*
       To compute the angle for each point, keeping the radius
       constant we use the formula angle = 360° * index / number
