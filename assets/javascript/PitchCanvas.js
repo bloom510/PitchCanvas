@@ -82,7 +82,7 @@
           context.stroke();
           // lineInit = false;
         } else { //move context to the clicked circle and initiate drawing
-          console.log(`dot ${} clicked`);
+          // console.log(`dot ${} clicked`);
           context.moveTo(dots[i].x, dots[i].y);
           lineInit = true;
         }
