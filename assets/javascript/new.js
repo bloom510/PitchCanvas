@@ -148,7 +148,7 @@
         //         url = URL.createObjectURL(blob);
           
         //     newImg.src = url;
-        //     document.body.appendChild(newImg);
+        //     document.body.appendChild(newImg);it 
         //   });
       //  }
 
@@ -164,10 +164,15 @@
    
      context.rotate((Math.PI * 2) * 0.5)
      cancelAnimationFrame(this.animation)
-     init()
+     
     //  context.translate(canvas.width/4,canvas.height/2)
-     PitchCircle()
-     movePolygon()
+
+    setTimeout( () => { 
+      init()
+      PitchCircle()
+      movePolygon()
+    }, 1000);
+     
    });
 
   }
