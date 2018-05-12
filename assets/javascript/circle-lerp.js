@@ -7,6 +7,11 @@
   canvas.height = window.innerHeight ;
   context.fillStyle = 'black';
   context.fillRect(0,0,canvas.width,canvas.height);
+  // context.arc(canvas.width/2, canvas.height/2, 295, 0, 2 * Math.PI, false);
+  // context.fill()
+  // context.clip();
+  const PHI = (1 + Math.sqrt(5)) / 2;
+
  
   // context.fillStyle = 'orange';
   // context.arc(canvas.width / 2 + 2, canvas.height / 2, 40, 0, Math.PI * 2);
@@ -33,9 +38,12 @@
     draw: function(x, y) {
       
       context.beginPath();
-      context.arc(x, y, Math.random()*1.5, 0, Math.PI * 2);
+      context.arc(x, y, Math.random()*.5, 0, Math.PI * 2);
       context.fillStyle = this.color;
       context.fill();
+  
+ 
+    
 
     }
   };
@@ -56,7 +64,7 @@ function lerpColor(a, b, amount) {
 
   //Draw pitch circle (12-pointed circle)
   function PitchCircle() {
-    let lastColor = '#008080';
+    let lastColor = '#000000';
     for (let i = 0; i < 5000; i++) {
 
       /*
@@ -70,7 +78,8 @@ memorable numbers:
       of sides. We'll be dealing with radians and note degrees here,
       and 2π radians make up the 360 degrees in a circle.
       */
-      let interval = (Math.PI * 2) / 5000;
+      let interval = (Math.PI * 2) / 2000;
+      
 
       //Multiply the interval by each index to return its place along the circle.
       let radianAngle = interval * (i + 9);
@@ -81,43 +90,55 @@ memorable numbers:
 
       //Create a new dot for every iteration through this loop
       let newdot = Object.create(dot);
+
       newdot.x = x;
       newdot.y = y;
-      newdot.color = lerpColor(lastColor, '#800080' , 20)
+ 
+      newdot.color = lerpColor(lastColor, '#FFFFFF' , 5000)
       lastColor = newdot.color;
-      //create a new circle
-      //push dots into circle.dots
-      // push circle into circles array
-      // newdot.draw(x, y);
+    
       dots.push(newdot);
+       
     }
   }
 
   PitchCircle();
 
-  const PHI = (1 + Math.sqrt(5)) / 2;
-      //  If desired, individual circles may be accessed and manipulated like so:
-      //  let firstCircle = dots[0];
-      //  firstCircle.setColor("rgba(255, 204, 0, 1)");
-      //  firstCircle.draw(firstCircle.x, firstCircle.y);
       const animate = () => {
       for(let i = 0; i < dots.length; i++){
    
-        // dots[i].x += .45;
-        dots[i].y += .45;
+        dots[i].x -= Math.sin(Math.cos(i * canvas.width)) * Math.random()*1.5;
+        // dots[i].y += Math.cos(Math.sin(i * canvas.height)) * 4;
+
+
+          // dots[i].x += Math.sin(Math.cos(i * canvas.width)) / 1.5;
+          // dots[i].y += Math.cos(Math.sin(i * canvas.height));
+          
+          // dots[i].y += Math.sin(Math.cos(i * canvas.width));
 
         dots[i].draw(dots[i].x, dots[i].y)
-        // context.translate((canvas.width / 2), (canvas.height /2));
-        // context.rotate((Math.PI ) * .5);
-
-
+      
+        //moon: width - 680 etc
+        if (dots[i].x > Math.abs(canvas.width) || dots[i].y > Math.abs(canvas.height) * 2  ) {
+          context.closePath();
+          alert('fin')
+          canvas.toBlob(function(blob) {
+            var newImg = document.createElement('img'),
+                url = URL.createObjectURL(blob);
+          
+            newImg.src = url;
+            document.body.appendChild(newImg);
+          });
+          return;
+      }
 
         
       }
-      requestAnimationFrame(() => {
+      let anim = requestAnimationFrame(() => {
+        
         animate()
-              // context.translate((canvas.width / 2), (canvas.height /2));
-        context.rotate((Math.PI ) * .5);
+        
+ 
 
       })
       
