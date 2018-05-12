@@ -13,7 +13,7 @@
     context.lineWidth = 2;
     context.strokeStyle = '#77aaff'
     context.lineCap = 'round'
-    context.setLineDash([3,5]);
+    // context.setLineDash([3,5]);
     context.fillStyle = 'black';
     context.fillRect(0,0,canvas.width,canvas.height);
   }
@@ -25,7 +25,7 @@
 
   //creates a singular circle object to be distributed along the perimeter of a larger circle
   let dot = {
-    radius: 800, //affects the radius of polar coords tbd
+    radius: 650, //affects the radius of polar coords tbd
     xPos: canvas.width / 2,
     yPos: (canvas.height) / 2,
     color: "transparent",
@@ -58,7 +58,7 @@
   //Draw pitch circle (12-pointed circle)
   function PitchCircle() {
     
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 25; i++) {
       /*
       To compute the angle for each point, keeping the radius
       constant we use the formula angle = 360° * index / number
@@ -76,6 +76,7 @@
 
       //Create a new dot for every iteration through this loop
       let newdot = Object.create(dot);
+   
       newdot.x = x;
       newdot.y = y;
  
@@ -160,8 +161,11 @@
   // const cancelAnimation = () => cancelAnimationFrame(this.animation)
 
    requestAnimationFrame(() => { 
+   
+     context.rotate((Math.PI * 2) * 0.5)
      cancelAnimationFrame(this.animation)
      init()
+    //  context.translate(canvas.width/4,canvas.height/2)
      PitchCircle()
      movePolygon()
    });
