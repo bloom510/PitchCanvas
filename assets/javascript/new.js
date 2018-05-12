@@ -10,7 +10,7 @@
 
   const init = () => {
     context.clearRect(0,0, canvas.width, canvas.height)
-    context.lineWidth = 2;
+    context.lineWidth = 5;
     context.strokeStyle = '#77aaff'
     context.lineCap = 'round'
     // context.setLineDash([3,5]);
