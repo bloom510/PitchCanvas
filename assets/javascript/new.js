@@ -9,8 +9,7 @@
   const PHI = (1 + Math.sqrt(5)) / 2;
 
   const init = () => {
-    context.clearRect(0,0, canvas.width, canvas.height)
-    context.lineWidth = 2;
+    context.lineWidth = .5;
     context.strokeStyle = '#77aaff'
     context.lineCap = 'round'
     // context.setLineDash([3,5]);
@@ -25,9 +24,9 @@
 
   //creates a singular circle object to be distributed along the perimeter of a larger circle
   let dot = {
-    radius: 550, //affects the radius of polar coords tbd
-    xPos: canvas.width / 2,
-    yPos: (canvas.height) / 2,
+    radius: 150, //affects the radius of polar coords tbd
+    xPos: 250 ,
+    yPos: 200,
     color: "transparent",
 
     setColor: function(newColor) {
@@ -125,6 +124,8 @@
 
   }
 
+  let counter = 0;
+  let lastColor = '#77aaff'
   const movePolygon = () => {
     
     for(let i = 0; i <= 12; i++){
@@ -159,16 +160,24 @@
    } 
 
   // const cancelAnimation = () => cancelAnimationFrame(this.animation)
-
+  
    requestAnimationFrame(() => { 
-   
-     context.rotate((Math.PI * 2) * 0.5)
-     cancelAnimationFrame(this.animation)
+    // lastColor = lerpColor(lastColor, '#ff77aa' , 5000)
+    // context.strokeStyle = lastColor;
+    cancelAnimationFrame(this.animation)
+    counter++;
+    if(counter % 6 === 0) {
+      context.translate(-1750,350)
+    } else {
+      context.translate(350,0)
+      
+    }
      
-    //  context.translate(canvas.width/4,canvas.height/2)
+     
+
 
     setTimeout( () => { 
-      init()
+      // init()
       PitchCircle()
       movePolygon()
     }, 1000);
