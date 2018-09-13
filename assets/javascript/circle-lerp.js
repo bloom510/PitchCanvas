@@ -3,8 +3,8 @@
 
   let canvas = document.querySelector("#myCanvas");  //our canvas element
   let context = canvas.getContext("2d");   //canvas context
-  canvas.width =  window.innerWidth ;
-  canvas.height = window.innerHeight ;
+  canvas.width =  window.innerWidth * 1.5;
+  canvas.height = window.innerHeight * 1.5;
   context.fillStyle = 'black';
   context.fillRect(0,0,canvas.width,canvas.height);
   // context.arc(canvas.width/2, canvas.height/2, 295, 0, 2 * Math.PI, false);
@@ -26,7 +26,7 @@
 
   //creates a singular circle object to be distributed along the perimeter of a larger circle
   let dot = {
-    radius: 300, //affects the radius of polar coords tbd
+    radius: 100, //affects the radius of polar coords tbd
     xPos: canvas.width / 2,
     yPos: canvas.height / 2,
     color: '#008080',
@@ -38,7 +38,7 @@
     draw: function(x, y) {
       
       context.beginPath();
-      context.arc(x, y, Math.random()*.5, 0, Math.PI * 2);
+      context.arc(x, y, Math.random()*.05, 0, Math.PI * 2);
       context.fillStyle = this.color;
       context.fill();
   
@@ -65,7 +65,7 @@ function lerpColor(a, b, amount) {
   //Draw pitch circle (12-pointed circle)
   function PitchCircle() {
     let lastColor = '#000000';
-    for (let i = 0; i < 5000; i++) {
+    for (let i = 0; i < 50000; i++) {
 
       /*
 memorable numbers:
@@ -78,7 +78,7 @@ memorable numbers:
       of sides. We'll be dealing with radians and note degrees here,
       and 2π radians make up the 360 degrees in a circle.
       */
-      let interval = (Math.PI * 2) / 2000;
+      let interval = (Math.PI * 2) / 2;
       
 
       //Multiply the interval by each index to return its place along the circle.
@@ -86,7 +86,7 @@ memorable numbers:
 
       //Convert x and y coords from cartesian to polar, relative to the circle's radius
       let x = Math.round(dot.xPos + dot.radius * Math.cos(radianAngle));
-      let y = Math.round(dot.yPos + dot.radius * Math.sin(radianAngle));
+      let y = Math.round(dot.yPos + dot.radius * Math.sin(radianAngle * Math.random()));
 
       //Create a new dot for every iteration through this loop
       let newdot = Object.create(dot);
@@ -107,21 +107,20 @@ memorable numbers:
       const animate = () => {
       for(let i = 0; i < dots.length; i++){
    
-        dots[i].x -= Math.sin(Math.cos(i * canvas.width)) * Math.random()*1.5;
+        //  dots[i].x -= Math.sin(Math.cos(i * canvas.width)) * Math.random()*1.5;
         // dots[i].y += Math.cos(Math.sin(i * canvas.height)) * 4;
 
 
-          // dots[i].x += Math.sin(Math.cos(i * canvas.width)) / 1.5;
+          dots[i].x += Math.sin(Math.cos(i * canvas.width)) / 1.5;
           // dots[i].y += Math.cos(Math.sin(i * canvas.height));
-          
-          // dots[i].y += Math.sin(Math.cos(i * canvas.width));
-
-        dots[i].draw(dots[i].x, dots[i].y)
+          // dots[i].x += Math.cos(Math.sin(i * canvas.width));
+          dots[i].y += Math.sin(Math.cos(i * canvas.height));
+         dots[i].draw(dots[i].x, dots[i].y)
       
         //moon: width - 680 etc
         if (dots[i].x > Math.abs(canvas.width) || dots[i].y > Math.abs(canvas.height) * 2  ) {
           context.closePath();
-          alert('fin')
+     
           canvas.toBlob(function(blob) {
             var newImg = document.createElement('img'),
                 url = URL.createObjectURL(blob);

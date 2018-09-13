@@ -12,7 +12,7 @@
     context.lineWidth = .5;
     context.strokeStyle = '#77aaff'
     context.lineCap = 'round'
-    // context.setLineDash([3,5]);
+    context.setLineDash([3,5]);
     context.fillStyle = 'black';
     context.fillRect(0,0,canvas.width,canvas.height);
   }
